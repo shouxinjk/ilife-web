@@ -12,7 +12,8 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 }
 body {
     color: rgba(0, 0, 0, 0.6);
-    overflow-x: hidden;    
+    overflow-x: hidden;   
+    letter-spacing: 0.1em; 
 }
 table{border-collapse:collapse;border-spacing:0;}
 fieldset,img {border:0;}
@@ -36,7 +37,7 @@ input,img{border: none;}
 }
 .search{
     width: 90%;
-    margin-left: 5%;
+    margin-left: 1.66667rem;
 }
 .header span{
     color: white;
@@ -45,20 +46,17 @@ input,img{border: none;}
     line-height: 5rem;
 }
 .header input{
-    width: 30rem;
-    position: relative;
-    left: 1.66667rem;
+    width: 25rem;
     height: 3rem;
-    top:-0.33333rem;
     border-radius: 0.83333rem;
     font-size: 1.66667rem;
-    padding-left: 1.66667rem;
     border: none;
 }
 .nav{
     height:5rem;
     width: 100%;
     border-bottom:1px solid silver;
+    overflow: hidden;
 }
 .nav ul li{
     list-style-type: none;

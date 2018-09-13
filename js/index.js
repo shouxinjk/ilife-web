@@ -1,14 +1,28 @@
 // 文档加载完毕后执行
 $(document).ready(function ()
 {
-    var args = getQuery();
+    //根据屏幕大小计算字体大小
+    const oHtml = document.getElementsByTagName('html')[0]
+    const width = oHtml.clientWidth;
+    var rootFontSize = 12 * (width / 1440);// 在1440px的屏幕基准像素为12px
+    rootFontSize = rootFontSize <8 ? 8:rootFontSize;//最小为8px
+    rootFontSize = rootFontSize >16 ? 16:rootFontSize;//最大为18px
+    oHtml.style.fontSize = rootFontSize+ "px";
+    //计算图片流宽度：根据屏幕宽度计算，最小显示2列
+    if(width < 2*columnWidth){//如果屏幕不能并排2列，则调整图片宽度
+        columnWidth = (width-columnMargin*4)/2;//由于每一个图片左右均留白，故2列有4个留白
+    }
+    var args = getQuery();//获取参数
     $('#waterfall').NewWaterfall({
-        width: 300,
+        width: columnWidth,
         delay: 100,
     });
     category = args["category"]?args["category"]:0; //如果是跳转，需要获取当前目录
     loadCategories(category);
 });
+
+var columnWidth = 300;//默认宽度300px
+var columnMargin = 5;//默认留白5px
 
 var loading = false;
 var dist = 500;
@@ -55,12 +69,20 @@ function loadItems(){//获取内容列表
 function insertItem(){
     // 加载内容
     var item = items[num-1];
-    var imgWidth = 290;//注意：改尺寸需要根据宽度及留白计算，当前宽度为360，左右留白5，故宽度为350
-    var imgHeight = random(50, 300);
+    var imgWidth = columnWidth-2*columnMargin;//注意：改尺寸需要根据宽度及留白计算，例如宽度为360，左右留白5，故宽度为350
+    var imgHeight = random(50, 300);//随机指定初始值
+    //计算图片高度
+    var img = new Image();
+    img.src = item.images[0];
+    var orgWidth = img.width;
+    var orgHeight = img.height;
+    imgHeight = orgHeight/orgWidth*imgWidth;
+    //计算文字高度：按照1倍行距计算
+    //console.log("orgwidth:"+orgWidth+"orgHeight:"+orgHeight+"width:"+imgWidth+"height:"+imgHeight);
     var image = "<img src='"+item.images[0]+"' width='"+imgWidth+"' height='"+imgHeight+"'/>"
     //var title = "<span class='title'><a href='info.html?category="+category+"&id="+item._key+"'>"+item.title+"</a></span>"
-    var title = "<span class='title'>"+item.title+"</span>"
-    $("#waterfall").append("<li><div data='"+item._key+"' style='height:" + (imgHeight+60) + "px'>" + image +title+ "</div></li>");
+    var title = "<div class='title'>"+item.title+"</div>"
+    $("#waterfall").append("<li><div data='"+item._key+"'>" + image +title+ "</div></li>");
     num++;
 
     //注册事件
