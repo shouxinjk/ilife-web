@@ -1,5 +1,9 @@
 /*rest default style*/
-html{color:#000;background:#FFF;}
+html{
+    color:#000;
+    background:#FFF;    
+    font-size:12px;
+}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin:0;
     padding:0;
@@ -20,14 +24,14 @@ q:before,q:after {content:'';}
 abbr,acronym { border:0;}
 @charset "utf-8";
 *{margin: 0px;padding: 0px;}
-a{text-decoration: none;color: #000000;font-size:15px;/*字体*/}
+a{text-decoration: none;color: #000000;font-size:1.25rem;/*字体*/}
 li{list-style: none;}
 input,img{border: none;}
 /*end of rest*/
 
 .header{
     width: 100%;
-    height: 60px;
+    height: 5rem;
     background-color:red;
 }
 .search{
@@ -36,31 +40,31 @@ input,img{border: none;}
 }
 .header span{
     color: white;
-    font-size:24px;
+    font-size:2rem;
     font-weight: bold;
-    line-height: 60px;
+    line-height: 5rem;
 }
 .header input{
-    width: 360px;
+    width: 30rem;
     position: relative;
-    left: 20px;
-    height: 36px;
-    top:-4px;
-    border-radius: 10px;
-    font-size: 20px;
-    padding-left: 20px;
+    left: 1.66667rem;
+    height: 3rem;
+    top:-0.33333rem;
+    border-radius: 0.83333rem;
+    font-size: 1.66667rem;
+    padding-left: 1.66667rem;
     border: none;
 }
 .nav{
-    height:60px;
+    height:5rem;
     width: 100%;
     border-bottom:1px solid silver;
 }
 .nav ul li{
     list-style-type: none;
     float: left;
-    line-height: 60px;
-    margin-left: 20px;
+    line-height: 5rem;
+    margin-left: 1.66667rem;
     font-size: 1.5em;
     font-weight:bold;
 }
