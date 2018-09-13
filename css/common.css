@@ -1,0 +1,69 @@
+/*rest default style*/
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+    font-family: "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;   
+    line-height: 1;
+}
+body {
+    color: rgba(0, 0, 0, 0.6);
+    overflow-x: hidden;    
+}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:0;}
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal;}
+ol,ul {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;}
+q:before,q:after {content:'';}
+abbr,acronym { border:0;}
+@charset "utf-8";
+*{margin: 0px;padding: 0px;}
+a{text-decoration: none;color: #000000;font-size:15px;/*字体*/}
+li{list-style: none;}
+input,img{border: none;}
+/*end of rest*/
+
+.header{
+    width: 100%;
+    height: 60px;
+    background-color:red;
+}
+.search{
+    width: 90%;
+    margin-left: 5%;
+}
+.header span{
+    color: white;
+    font-size:24px;
+    font-weight: bold;
+    line-height: 60px;
+}
+.header input{
+    width: 360px;
+    position: relative;
+    left: 20px;
+    height: 36px;
+    top:-4px;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 20px;
+    border: none;
+}
+.nav{
+    height:60px;
+    width: 100%;
+    border-bottom:1px solid silver;
+}
+.nav ul li{
+    list-style-type: none;
+    float: left;
+    line-height: 60px;
+    margin-left: 20px;
+    font-size: 1.5em;
+    font-weight:bold;
+}
+.nav ul .showNav{
+    color: #d14046;
+}

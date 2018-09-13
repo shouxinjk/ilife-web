@@ -1,0 +1,10 @@
+
+span.title{
+    font-weight:bold;
+    font-size:12px;
+}
+
+span.title a{
+    color:black;
+    text-decoration: none;
+}
