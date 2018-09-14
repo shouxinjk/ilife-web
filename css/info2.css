@@ -15,6 +15,43 @@ a{
 	width:30%;
 }
 
+#shopping{
+	display:flex;
+	flex-direction:row;
+	justify-content:flex-start;
+	flex-wrap:nowrap;
+}
+
+#shopping-summary{
+	width:80%;
+	display:flex;
+	flex-direction:row;
+	justify-content:flex-start;
+	align-items:center;
+}
+#shopping-summary>img{
+	height:24px;
+	margin:2px;
+	border-radius: 5px;
+}
+
+.buy-btn{
+	background-color: #f04848;
+    border: none;
+    color: white;
+    margin: 2px auto;
+    padding:0 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+#shopping-link{
+	width:20%;
+}
+
 #tags{
 	display:flex;
 	justify-content:flex-start;

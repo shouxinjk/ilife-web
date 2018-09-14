@@ -30,12 +30,16 @@ var galleryHeight = 378;
 
 //将item显示到页面
 function showContent(item){
-    //左侧：
+    //购买按钮
+    if(item.distributor.images.length>0)$("#shopping-summary").append("<img src='"+item.distributor.images[0]+"'/>");
+    if(item.seller.images.length>0)$("#shopping-summary").append("<img src='"+item.seller.images[0]+"'/>");
+    if(item.manufacturer.images.length>0)$("#shopping-summary").append("<img src='"+item.manufacturer.images[0]+"'/>");
+    $("#jumpbtn").click(function(){//支持点击事件
+        window.location.href = item.url;
+    });
     //标题
     $("#content").append("<div class='title'>"+item.title+"</div>");
-    // 标签
-    //正文及图片
-    for(var i=0;i<item.images.length;i++){
+    for(var i=0;i<item.images.length;i++){//正文及图片
         $("#gallery").append("<li><img src='" + item.images[i] + "' alt=''/></li>");//加载图片幻灯
         $("#content").append("<img src='" + item.images[i] + "' width='100%'/>");//正文图片
     }
@@ -48,12 +52,8 @@ function showContent(item){
         frame_height: 60
     }); 
 
-    //右侧：
-    //标题
-    $("#title").html(item.title);
-    //推荐者列表
-    //标签云
-    for(var i=0;i<item.tags.length;i++){
+    $("#title").html(item.title);//标题
+    for(var i=0;i<item.tags.length;i++){//标签云
         $("#tags").append("<div class='tag'>" + item.tags[i] + "</div>");//加载图片幻灯
     }
     //随机着色
@@ -64,7 +64,6 @@ function showContent(item){
         $(this).css({"background-color":bgColor,"color":color});
     });
     //广告
-    //TODO
 }
 
 /*

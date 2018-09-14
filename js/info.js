@@ -51,6 +51,14 @@ function showContent(item){
     }); 
 
     //右侧：
+    //购买按钮
+    if(item.distributor.images.length>0)$("#shopping-summary").append("<img src='"+item.distributor.images[0]+"'/>");
+    if(item.seller.images.length>0)$("#shopping-summary").append("<img src='"+item.seller.images[0]+"'/>");
+    if(item.manufacturer.images.length>0)$("#shopping-summary").append("<img src='"+item.manufacturer.images[0]+"'/>");
+    $("#jumpbtn").click(function(){//支持点击事件
+        console.log(item.url);
+        window.location.href = item.url;
+    });    
     //标题
     $("#title").html(item.title);
     //推荐者列表
