@@ -39,7 +39,7 @@ function showContent(item){
     //正文及图片
     for(var i=0;i<item.images.length;i++){
         $("#gallery").append("<li><img src='" + item.images[i] + "' alt=''/></li>");//加载图片幻灯
-        $("#content").append("<img src='" + item.images[i] + "' width='100%'/>");//正文图片
+        $("#content").append("<img src='" + item.images[i] + "'/>");//正文图片
     }
 
     //初始化图片幻灯
