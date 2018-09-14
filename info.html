@@ -3,6 +3,7 @@
 <head>
     <title>上色生活 - 小确幸大生活</title>
     <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="ext/galleryview/css/galleryview.css">
     <link rel="stylesheet" type="text/css" href="css/reset2.0.min.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/info.css">
@@ -23,11 +24,20 @@
         </ul>
     </div>
 
-    <div id="content">
-
+    <div id="body">
+        <div id="main">
+            <div class="imageslide">
+                <ul id="gallery" class="galleryView"></ul>
+            </div>
+            <div id="content"></div>
+        </div>
+        <div id="meta">
+            <div id="title" class="title side"></div>
+            <div id="tags" class="side"></div>
+            <div id="author" class="side"></div>
+            <div id="ads" class="side"></div>
+        </div>
     </div>
-
-    <div class="bottom"><button>立即拔草</button></div>
 
     <div class="foot"></div>
 </div>
@@ -36,7 +46,8 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="js/star-rating.min.js"></script>
+<script type="text/javascript" src="ext/galleryview/js/jquery.galleryview.js"></script>
+<script type="text/javascript" src="ext/galleryview/js/jquery.timers.min.js"></script>
 <script type="text/javascript" src="js/util.js"></script>
 <script type="text/javascript" src="js/info.js"></script>
 </html>
