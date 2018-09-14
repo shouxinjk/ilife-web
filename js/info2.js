@@ -8,18 +8,16 @@ $(document).ready(function ()
     rootFontSize = rootFontSize <8 ? 8:rootFontSize;//最小为8px
     oHtml.style.fontSize = rootFontSize+ "px";
     //设置正文部分宽度
-    var bodyWidth = 960*width/1440; //1440分辨率下显示960宽度
-    $("#body").width(bodyWidth);
-    galleryWidth = bodyWidth*0.7;//占比70%，960下宽度为672
+    galleryWidth = width;//占比100%
     galleryHeight = 9*galleryWidth/16;//宽高比为16:9
     $("#main").width(galleryWidth);
     //处理参数
     var args = getQuery();
     var category = args["category"]; //当前目录
     var id = args["id"];//当前内容
-    //判断屏幕大小，如果是小屏则跳转
-    if(width<800){
-        window.location.href=window.location.href.replace(/info.html/g,"info2.html");
+    //判断屏幕大小，如果是大屏则跳转
+    if(width>=800){
+        window.location.href=window.location.href.replace(/info2.html/g,"info.html");
     }
     //加载导航和内容
     loadCategories(category);
@@ -78,18 +76,36 @@ function showContent(item){
 </view>  
 */
 function showHosts(hosts){
-    var template="<div class='person'>"+
+    //单行显示
+    var templateFlat="<div class='person'>"+
     "<div class='logo'><img src='__imgSrc' alt='__name'/></div>"+//image
     "<div class='name'>__name</div>"+//name
     "<div class='connection'><button type='button' class='btn __status'>__text</button></div>"+//button
     "</div>";
+    //折叠显示
+    var templateFold="<div class='person-fold'>"+
+    "<div class='logo'><img src='__imgSrc' alt='__name'/></div>"+//image
+    "<div class='name'>__name</div>"+//name
+    "<div class='connection'><button type='button' class='btn __status'>__text</button></div>"+//button
+    "</div>";
+    //判断是否折叠显示
+    var isFold = hosts.length>3?true:false;
+    var authorEl = isFold?$("#author-fold"):$("#author")
+    var template = isFold?templateFold:templateFlat;
     for(var i=0;i<hosts.length;i++){
         var h = hosts[i];
         var hostEl = template.replace(/__imgSrc/g,h.avatarUrl)
             .replace(/__name/g,h.nickName)
             .replace(/__status/g,"toconnect")
             .replace(/__text/g,"+关注");
-        $("#author").append(hostEl);
+        authorEl.append(hostEl);
+    }
+    if(isFold){//仅显示折叠父元素
+        $("#author").css("display","none");
+        $("#author-fold").css("display","flex");
+    }else{
+        $("#author").css("display","block");
+        $("#author-fold").css("display","none");
     }
 }
 
