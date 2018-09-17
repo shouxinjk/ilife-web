@@ -5,7 +5,7 @@ $(document).ready(function ()
     const oHtml = document.getElementsByTagName('html')[0]
     const width = oHtml.clientWidth;
     var rootFontSize = 12 * (width / 1440);// 在1440px的屏幕基准像素为12px
-    rootFontSize = rootFontSize <8 ? 8:rootFontSize;//最小为8px
+    rootFontSize = rootFontSize <9 ? 9:rootFontSize;//最小为8px
     oHtml.style.fontSize = rootFontSize+ "px";
     //设置正文部分宽度
     galleryWidth = width;//占比100%
@@ -25,15 +25,17 @@ $(document).ready(function ()
     loadHosts(id);
 });
 
-var galleryWidth = 673;
+var galleryWidth = 672;
 var galleryHeight = 378;
 
 //将item显示到页面
 function showContent(item){
     //购买按钮
+    /*
     if(item.distributor && item.distributor.images && item.distributor.images.length>0)$("#shopping-summary").append("<img src='"+item.distributor.images[0]+"'/>");
     if(item.seller && item.seller.images && item.seller.images.length>0)$("#shopping-summary").append("<img src='"+item.seller.images[0]+"'/>");
     if(item.producer && item.producer.images && item.producer.images.length>0)$("#shopping-summary").append("<img src='"+item.producer.images[0]+"'/>");
+    //*/
     $("#jumpbtn").click(function(){//支持点击事件
         window.location.href = item.url;
     });
