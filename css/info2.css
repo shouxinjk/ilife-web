@@ -15,6 +15,40 @@ a{
 	width:30%;
 }
 
+#score{
+	display:flex;
+	flex-direction:row;
+	justify-content:flex-start;
+	flex-wrap:nowrap;
+	text-align: right;
+	margin:10px 5px;	
+}
+#score .comment{
+	width:15%;
+}
+#score .price{
+	width:20%;
+	border-left:1px solid silver;
+	border-right:1px solid silver;
+	padding:0 5px;
+	margin:0 5px;
+}
+#score .score{
+	width:15%;
+}
+.link{
+	width:50%;
+	text-align: right;
+}
+.distributor{border:1px solid silver;border-radius:1.2rem;padding:0 0.8rem;font-size:1.2rem;}
+
+.label{font-size:1rem;}
+.rank{font-size: 2rem;color:green;}
+.rank .base{font-size: 1.6rem;color:gray;}
+.price-bid{font-size: 1.6rem;padding-right: 0;margin-right: 0;text-decoration: line-through;color:gray;font-weight:normal;}
+.price-sale{font-size: 2rem;color:red;text-align: right;font-weight: bold;}
+.match{font-size: 2rem;font-weight: bold;color:darkgreen;}
+
 #shopping{
 	display:flex;
 	flex-direction:row;
@@ -37,15 +71,17 @@ a{
 
 .buy-btn{
 	background-color: #f04848;
+	width:80%;
     border: none;
+    border-radius: 2rem;
     color: white;
-    margin: 2px auto;
+    margin: 5px;
     padding:0 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 2rem;
+    line-height: 2.8rem;
 }
 
 #shopping-link{
@@ -57,14 +93,11 @@ a{
 	justify-content:flex-start;
 	align-content:flex-start;
 	flex-wrap: wrap;
-	border-bottom: 1px solid silver;
-	border-top: 1px solid silver;
 	padding:2px 0;
 	margin-left:5px;
 }
 #tags>div{
 	font-size: 1.2rem;
-	color:white;
 	padding:5px;
 	margin:2.5px;
 	font-weight: bold;
@@ -81,11 +114,12 @@ a{
 
 #content div{
 	line-height: 1.5;
+	font-size: 1.2rem;
 }
 
 .title{
 	font-weight: bold;
-	font-size:1.2rem;
+	font-size:1.6rem;
 	line-height: 2rem;
 	padding:5px;
 }

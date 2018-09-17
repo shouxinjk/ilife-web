@@ -31,14 +31,15 @@ var galleryHeight = 378;
 //将item显示到页面
 function showContent(item){
     //购买按钮
-    if(item.distributor.images.length>0)$("#shopping-summary").append("<img src='"+item.distributor.images[0]+"'/>");
-    if(item.seller.images.length>0)$("#shopping-summary").append("<img src='"+item.seller.images[0]+"'/>");
-    if(item.manufacturer.images.length>0)$("#shopping-summary").append("<img src='"+item.manufacturer.images[0]+"'/>");
+    if(item.distributor && item.distributor.images && item.distributor.images.length>0)$("#shopping-summary").append("<img src='"+item.distributor.images[0]+"'/>");
+    if(item.seller && item.seller.images && item.seller.images.length>0)$("#shopping-summary").append("<img src='"+item.seller.images[0]+"'/>");
+    if(item.producer && item.producer.images && item.producer.images.length>0)$("#shopping-summary").append("<img src='"+item.producer.images[0]+"'/>");
     $("#jumpbtn").click(function(){//支持点击事件
         window.location.href = item.url;
     });
-    //标题
-    $("#content").append("<div class='title'>"+item.title+"</div>");
+    //标题与摘要
+    $("#content").append("<div class='title'>"+item.title+"</div>");//标题
+    if(item.summary && item.summary.length>0)$("#content").append("<div class='summary'>"+item.summary+"</div>");//摘要
     for(var i=0;i<item.images.length;i++){//正文及图片
         $("#gallery").append("<li><img src='" + item.images[i] + "' alt=''/></li>");//加载图片幻灯
         $("#content").append("<img src='" + item.images[i] + "' width='100%'/>");//正文图片
@@ -52,17 +53,29 @@ function showContent(item){
         frame_height: 60
     }); 
 
-    $("#title").html(item.title);//标题
+    //标题
+    if(item.distributor && item.distributor.name){
+        $("#title").html("<span class='distributor'>"+item.distributor.name+"</span>"+item.title);
+    }else{
+        $("#title").html(item.title);
+    }
+    //评分
+    $("#score .comment").append("<div class='label'>评价</div><div class='rank'>"+item.score.rank+"/<span class='base'>"+item.score.base+"</span></div>");
+    $("#score .price").append("<div class='label'>价格</div><div class='price-sale'><span class='price-bid'>"+item.price.bid+"</span>"+item.price.sale+"</div>");
+    $("#score .score").append("<div class='label'>推荐度</div><div class='match'>"+(item.score.match*100)+"%</div>");
+    //标签
     for(var i=0;i<item.tags.length;i++){//标签云
         $("#tags").append("<div class='tag'>" + item.tags[i] + "</div>");//加载图片幻灯
     }
     //随机着色
+    /*
     $("#tags").find("div").each(function(){
         var rgb = Math.floor(Math.random()*(2<<23));
         var bgColor = '#'+rgb.toString(16);
         var color= '#'+(0xFFFFFF-rgb).toString(16);
         $(this).css({"background-color":bgColor,"color":color});
     });
+    //*/
     //广告
 }
 
