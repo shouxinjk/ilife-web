@@ -61,8 +61,8 @@ function showContent(item){
     if(item.producer && item.producer.images && item.producer.images.length>0)$("#shopping .summary").append("<img src='"+item.producer.images[0]+"'/>");
     //*/
     $("#jumpbtn").click(function(){//支持点击事件
-        console.log(item.url);
-        window.location.href = item.url;
+        //console.log(item.id,item.url);
+        window.location.href = "go.html?id="+item._key;
     });    
     //标题
     if(item.distributor && item.distributor.name){
