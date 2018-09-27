@@ -39,7 +39,7 @@ function showContent(item){
     $("#jumpbtn").click(function(){//支持点击事件
         //console.log(item.id,item.url);
         //window.location.href = "go.html?id="+item._key;
-        log(item,"buy",function(){
+        logstash(item,"buy",function(){
             window.location.href = item.url2?item.url2:item.url;
         });        
     });

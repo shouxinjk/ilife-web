@@ -18,7 +18,7 @@ function getQuery() {
     return args;
 }
 
-function log(item,action,fn){//记录日志
+function logstash(item,action,fn){//记录日志
     var target = item.url2?item.url2:item.url;
     var type = item.url2?"processed":"original";
     var data = {

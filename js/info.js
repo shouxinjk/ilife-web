@@ -62,8 +62,7 @@ function showContent(item){
     //*/
     $("#jumpbtn").click(function(){//支持点击事件
         //console.log(item.id,item.url);
-        
-        log(item,"buy",function(){
+        logstash(item,"buy",function(){
             //console.log("now try to jump...",$("#content .title a"));
             //$("#content .title a").parent().trigger( "click" );
             window.location.href = item.url2?item.url2:item.url;
