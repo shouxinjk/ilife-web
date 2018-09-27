@@ -17,3 +17,36 @@ function getQuery() {
     }
     return args;
 }
+
+function log(item,action,fn){//记录日志
+    var target = item.url2?item.url2:item.url;
+    var type = item.url2?"processed":"original";
+    var data = {
+        records:[{
+            value:{
+                user:"dummy",
+                action:action,
+                item:item._key,
+                title:item.title,
+                url:{
+                    type:type,
+                    target:target
+                },
+                timestamp:new Date()
+            }
+        }]
+    };
+    console.log("$.support.cors",$.support.cors);
+    $.ajax({
+        url:"http://kafka-rest.shouxinjk.net/topics/test",
+        type:"post",
+        data:JSON.stringify(data),//注意：不能使用JSON对象
+        headers:{
+            "Content-Type":"application/vnd.kafka.json.v2+json",
+            "Accept":"application/vnd.kafka.v2+json"
+        },
+        success:function(result){
+            fn(result);
+        }
+    })            
+}

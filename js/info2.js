@@ -38,7 +38,10 @@ function showContent(item){
     //*/
     $("#jumpbtn").click(function(){//支持点击事件
         //console.log(item.id,item.url);
-        window.location.href = "go.html?id="+item._key;
+        //window.location.href = "go.html?id="+item._key;
+        log(item,"buy",function(){
+            window.location.href = item.url2?item.url2:item.url;
+        });        
     });
     //标题与摘要
     $("#content").append("<div class='title'>"+item.title+"</div>");//标题

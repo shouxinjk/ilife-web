@@ -34,7 +34,7 @@ var galleryHeight = 378;
 function showContent(item){
     //左侧：
     //标题与摘要
-    $("#content").append("<div class='title'>"+item.title+"</div>");//标题
+    $("#content").append("<div class='title'><a id='jumplink' href='"+(item.url2?item.url2:item.url)+"'>"+item.title+"</a></div>");//标题
     if(item.summary && item.summary.length>0)$("#content").append("<div class='summary'>"+item.summary+"</div>");//摘要
     // 标签
     //正文及图片
@@ -62,7 +62,12 @@ function showContent(item){
     //*/
     $("#jumpbtn").click(function(){//支持点击事件
         //console.log(item.id,item.url);
-        window.location.href = "go.html?id="+item._key;
+        
+        log(item,"buy",function(){
+            //console.log("now try to jump...",$("#content .title a"));
+            //$("#content .title a").parent().trigger( "click" );
+            window.location.href = item.url2?item.url2:item.url;
+        });
     });    
     //标题
     if(item.distributor && item.distributor.name){
