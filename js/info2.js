@@ -40,7 +40,11 @@ function showContent(item){
         //console.log(item.id,item.url);
         //window.location.href = "go.html?id="+item._key;
         logstash(item,"buy",function(){
-            window.location.href = item.url2?item.url2:item.url;
+            var target = item.url;
+            if(item.link){
+                target = item.link.wap2?item.link.wap2:item.link.wap;
+            }
+            window.location.href = target;
         });        
     });
     //标题与摘要
