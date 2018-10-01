@@ -36,19 +36,12 @@ function showContent(item){
     if(item.seller && item.seller.images && item.seller.images.length>0)$("#shopping-summary").append("<img src='"+item.seller.images[0]+"'/>");
     if(item.producer && item.producer.images && item.producer.images.length>0)$("#shopping-summary").append("<img src='"+item.producer.images[0]+"'/>");
     //*/
-    $("#jumpbtn").click(function(){//支持点击事件
-        //console.log(item.id,item.url);
-        //window.location.href = "go.html?id="+item._key;
-        logstash(item,"buy",function(){
-            var target = item.url;
-            if(item.link){
-                target = item.link.wap2?item.link.wap2:item.link.wap;
-            }
-            window.location.href = target;
-        });        
-    });
+    $("#jumplink").click(function(){jump(item);}); 
+    $("#jumpbtn").click(function(){jump(item);});   
+    $("#title").click(function(){jump(item);}); 
+
     //标题与摘要
-    $("#content").append("<div class='title'>"+item.title+"</div>");//标题
+    $("#content").append("<div id='jumplink' class='title'>"+item.title+"</div>");//标题
     if(item.summary && item.summary.length>0)$("#content").append("<div class='summary'>"+item.summary+"</div>");//摘要
     for(var i=0;i<item.images.length;i++){//正文及图片
         $("#gallery").append("<li><img src='" + item.images[i] + "' alt=''/></li>");//加载图片幻灯
@@ -64,16 +57,20 @@ function showContent(item){
     }); 
 
     //标题
-    if(item.distributor && item.distributor.name){
-        $("#title").html("<span class='distributor'>"+item.distributor.name+"</span>"+item.title);
-    }else{
-        $("#title").html(item.title);
-    }
+    $("#title").html(item.title);
     //评分
-    $("#score .comment").append("<div class='label'>评价</div><div class='rank'>"+item.score.rank+"/<span class='base'>"+item.score.base+"</span></div>");
-    $("#score .price").append("<div class='label'>价格</div><div class='price-sale'><span class='price-bid'>"+item.price.bid+"</span>"+item.price.sale+"</div>");
-    $("#score .score").append("<div class='label'>推荐度</div><div class='match'>"+(item.score.match*100)+"%</div>");
+    if(item.rank.score){
+        $("#score .comment").append("<div class='label'>评价</div><div class='rank'>"+item.rank.score+"/<span class='base'>"+item.rank.base+"</span></div>");
+    }else{
+        $("#score .comment").append("<div class='label'>评价</div><div class='rank'><span class='empty'>暂无评分</span></div>");
+    }    
+    //$("#score .comment").append("<div class='label'>评价</div><div class='rank'>"+item.score.rank+"/<span class='base'>"+item.score.base+"</span></div>");
+    $("#score .price").append("<div class='label'>价格</div><div class='price-sale'><span class='price-bid'>"+(item.price.bid?item.price.bid:"")+"</span>"+item.price.sale+"</div>");
+    $("#score .score").append("<div class='label'>推荐度</div><div class='match'>"+(item.rank.match*100)+"%</div>");
     //标签
+    if(item.distributor && item.distributor.name){//来源作为标签
+        $("#tags").append("<div class='tag'>"+item.distributor.name+"</div>");
+    }    
     for(var i=0;i<item.tags.length;i++){//标签云
         $("#tags").append("<div class='tag'>" + item.tags[i] + "</div>");//加载图片幻灯
     }
@@ -87,6 +84,18 @@ function showContent(item){
     });
     //*/
     //广告
+}
+
+//点击跳转到原始链接
+function jump(item){//支持点击事件
+    //console.log(item.id,item.url);
+    logstash(item,"buy",function(){
+        var target = item.url;
+        if(item.link){
+            target = item.link.web2?item.link.web2:item.link.web;
+        }
+        window.location.href = target;
+    });
 }
 
 /*

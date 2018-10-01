@@ -45,6 +45,7 @@ a{
 .label{font-size:1rem;}
 .rank{font-size: 2rem;color:green;}
 .rank .base{font-size: 1.6rem;color:gray;}
+.rank .empty{font-size: 1rem;color:gray;}
 .price-bid{font-size: 1.6rem;padding-right: 0;margin-right: 0;text-decoration: line-through;color:gray;font-weight:normal;}
 .price-sale{font-size: 2rem;color:red;text-align: right;font-weight: bold;}
 .match{font-size: 2rem;font-weight: bold;color:darkgreen;}
