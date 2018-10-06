@@ -18,7 +18,17 @@ $(document).ready(function ()
         delay: 100,
     });
     category = args["category"]?args["category"]:0; //如果是跳转，需要获取当前目录
-    loadCategories(category);
+    tagging = args["keyword"]?args["keyword"]:""; //通过搜索跳转
+    if(tagging.trim().length>0){
+        $(".search input").attr("placeholder"," "+tagging);
+    }
+    loadCategories(category);//加载导航目录
+    $(document).keydown(function(event){//注册搜索事件
+        if(event.keyCode==13){
+            tagging = $(".search input").val().trim();
+            window.location.href="index.html?keyword="+tagging;
+        }
+    });
 });
 
 var columnWidth = 300;//默认宽度300px
@@ -30,7 +40,7 @@ var num = 1;//需要加载的内容下标
 
 var items = [];//所有内容列表
 var category  = 0; //当前目录ID
-var tagging = ""; //当前目录关联的查询关键词
+var tagging = ""; //当前目录关联的查询关键词，搜索时直接通过该字段而不是category进行
 
 var page = {
     size:20,//每页条数

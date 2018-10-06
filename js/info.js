@@ -25,6 +25,13 @@ $(document).ready(function ()
     loadCategories(category);
     loadItem(id);   
     loadHosts(id);
+    //注册搜索事件
+    $(document).keydown(function(event){//注册搜索事件
+    if(event.keyCode==13){
+        tagging = $(".search input").val().trim();
+        window.location.href="index.html?keyword="+tagging;
+    }
+    });
 });
 
 var galleryWidth = 673;
