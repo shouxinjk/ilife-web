@@ -170,12 +170,16 @@ function insertItem(){
 //当没有更多item时显示提示信息
 function showNoMoreMsg(){
     //todo：显示没有更多toast
+    /*
     $.toast({
         heading: 'Success',
         text: '没有更多了',
         showHideTransition: 'fade',
         icon: 'info'
     });   
+    //*/
+    $("#footer").toggleClass("footer-hide",false);
+    $("#footer").toggleClass("footer-show",true);
 }
 
 // 自动加载更多：此处用于测试，动态调整图片高度
