@@ -88,10 +88,9 @@ function loadItems(){//获取内容列表
             "Authorization":"Basic ZWxhc3RpYzpjaGFuZ2VtZQ=="
         },
         success:function(data){
-            if(data.hits.total==0){//如果没有内容，则显示提示文字
+            if(data.hits.hits.length==0){//如果没有内容，则显示提示文字
                 showNoMoreMsg();
             }else{
-                console.log("got es result.",data);
                 //更新总页数
                 var total = data.hits.total;
                 page.total = (total + page.size - 1) / page.size;
@@ -132,7 +131,6 @@ function loadItems(){//获取内容列表
 function insertItem(){
     // 加载内容
     var item = items[num-1];
-    console.log("insert item",item,items);
     var imgWidth = columnWidth-2*columnMargin;//注意：改尺寸需要根据宽度及留白计算，例如宽度为360，左右留白5，故宽度为350
     var imgHeight = random(50, 300);//随机指定初始值
     //计算图片高度
