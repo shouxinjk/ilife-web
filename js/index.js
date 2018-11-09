@@ -53,7 +53,11 @@ var esQuery={
     size:page.size,
     query: {
         match_all: {}
-    }
+    },
+    sort: [
+        { "@timestamp": { order: "desc" }},
+        { "_score":   { order: "desc" }}
+    ]
 };
 
 setInterval(function ()
