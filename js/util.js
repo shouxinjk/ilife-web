@@ -38,7 +38,7 @@ function logstash(item,action,fn){//记录日志
     };
     //console.log("$.support.cors",$.support.cors);
     $.ajax({
-        url:"http://kafka-rest.shouxinjk.net/topics/test",
+        url:"http://kafka-rest.shouxinjk.net/topics/log",
         type:"post",
         data:JSON.stringify(data),//注意：nginx启用CORS配置后不能直接通过JSON对象传值
         headers:{
