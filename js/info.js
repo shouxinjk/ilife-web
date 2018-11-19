@@ -100,12 +100,16 @@ function showContent(item){
     //*/
     //广告
     //TODO
+    //trace user action
+    logstash(item,"web","view",function(){
+        //do nothing
+    });    
 }
 
 //点击跳转到原始链接
 function jump(item){//支持点击事件
     //console.log(item.id,item.url);
-    logstash(item,"buy",function(){
+    logstash(item,"web","buy",function(){
         var target = item.url;
         if(item.link){
             target = item.link.web2?item.link.web2:item.link.web;

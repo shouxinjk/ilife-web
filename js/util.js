@@ -18,20 +18,18 @@ function getQuery() {
     return args;
 }
 
-function logstash(item,action,fn){//记录日志
+function logstash(item,client,action,fn){//记录日志
     var target = item.url2?item.url2:item.url;
     var type = item.url2?"processed":"original";
     var data = {
         records:[{
             value:{
-                user:"dummy",
+                itemId:item._key,
+                userId:"dummy",
+                item:item,
+                client:client,
+                user:{},//TODO: 需要增加用户信息
                 action:action,
-                item:item._key,
-                title:item.title,
-                url:{
-                    type:type,
-                    target:target
-                },
                 timestamp:new Date()
             }
         }]
