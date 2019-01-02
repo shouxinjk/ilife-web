@@ -101,6 +101,7 @@ function loadItems(){//获取内容列表
             "Content-Type":"application/json",
             "Authorization":"Basic ZWxhc3RpYzpjaGFuZ2VtZQ=="
         },
+        crossDomain: true,
         success:function(data){
             if(data.hits.hits.length==0){//如果没有内容，则显示提示文字
                 showNoMoreMsg();
