@@ -94,7 +94,7 @@ function loadItems(){//获取内容列表
     esQuery.from = (page.current+1) * page.size;
 
     $.ajax({
-        url:"http://search.pcitech.cn/stuff/_search",
+        url:"https://data.pcitech.cn/stuff/_search",
         type:"post",
         data:JSON.stringify(esQuery),//注意：nginx启用CORS配置后不能直接通过JSON对象传值
         headers:{
@@ -149,7 +149,7 @@ function insertItem(){
     var imgHeight = random(50, 300);//随机指定初始值
     //计算图片高度
     var img = new Image();
-    img.src = item.images?item.images[0]:"http://www.shouxinjk.net/list/images/logo00.jpeg";
+    img.src = item.images?item.images[0]:"https://www.biglistoflittlethings.com/list/images/logo00.jpeg";
     var orgWidth = img.width;
     var orgHeight = img.height;
     imgHeight = orgHeight/orgWidth*imgWidth;
