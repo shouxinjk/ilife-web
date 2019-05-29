@@ -39,6 +39,12 @@ input,img{border: none;}
     width: 90%;
     margin-left: 1.66667rem;
 }
+.search a{
+    font-size: 1.2rem;
+    font-weight:bold;
+    color:white;
+    padding-left:10px;
+}
 .header span{
     color: white;
     font-size:2rem;
