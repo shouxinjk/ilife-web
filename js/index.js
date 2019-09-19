@@ -38,7 +38,8 @@ $(document).ready(function ()
     $("#findByPrice").click(function(){//注册搜索事件：点击搜索好价
         tagging = $(".search input").val().trim();
         window.location.href="index.html?filter=byPrice&keyword="+tagging;
-    });  });
+    });  
+});
 
 var columnWidth = 300;//默认宽度300px
 var columnMargin = 5;//默认留白5px
