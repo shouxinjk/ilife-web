@@ -39,6 +39,14 @@ $(document).ready(function ()
         tagging = $(".search input").val().trim();
         window.location.href="index.html?filter=byPrice&keyword="+tagging;
     });  
+    $("#findByDistance").click(function(){//注册搜索事件：点击搜索附近
+        tagging = $(".search input").val().trim();
+        window.location.href="index.html?filter=byDistance&keyword="+tagging;
+    }); 
+    $("#findByScore").click(function(){//注册搜索事件：点击搜索好物
+        tagging = $(".search input").val().trim();
+        window.location.href="index.html?filter=byScore&keyword="+tagging;
+    });         
 });
 
 var columnWidth = 300;//默认宽度300px
