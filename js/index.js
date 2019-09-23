@@ -1,6 +1,8 @@
 // 文档加载完毕后执行
 $(document).ready(function ()
 {
+	//获取用户位置
+	getUserLocation();
     //根据屏幕大小计算字体大小
     const oHtml = document.getElementsByTagName('html')[0]
     const width = oHtml.clientWidth;
@@ -41,12 +43,12 @@ $(document).ready(function ()
     });  
     $("#findByDistance").click(function(){//注册搜索事件：点击搜索附近
         tagging = $(".search input").val().trim();
-        window.location.href="index.html?filter=byDistance&keyword="+tagging;
+        window.location.href="index.html?filter=byDistance&keyword="+tagging;    	
     }); 
     $("#findByScore").click(function(){//注册搜索事件：点击搜索好物
         tagging = $(".search input").val().trim();
         window.location.href="index.html?filter=byScore&keyword="+tagging;
-    });         
+    });        
 });
 
 var columnWidth = 300;//默认宽度300px
@@ -99,6 +101,59 @@ var esQueryByPrice={
     ]
 };
 
+function getQueryByDistance(lat=30.671479,lon=104.072331){//默认开始搜索地点为成都市，需要替换为用户地址
+	var esQueryByDistance={
+	  from:0,
+	  size:page.size,
+	  query: {
+	    function_score: {
+	      query: {
+	        match_all: {}
+	      },
+	      functions: [
+	        {
+	          gauss: {
+	            location: { 
+	              origin: { "lat": lat, "lon": lon },//使用起始地址填充
+	              offset: "3km",
+	              scale:  "2km"
+	            }
+	          }
+	        }
+	      ],
+	      boost_mode: "multiply"
+	    }
+	  },
+	    sort: [
+	        { "_score":   { "order": "desc" }},
+	        { "@timestamp": { "order": "desc" }}
+	    ]
+	};
+	return esQueryByDistance;
+}
+
+function getUserLocation(){
+	console.log("trying to update user location.",returnCitySN);
+	// 创建地址解析器实例
+	var myGeo = new BMap.Geocoder();
+	// 将地址解析为经纬度
+	myGeo.getPoint(returnCitySN.cname, function(point){
+		if (point) {
+			console.log("got detailed location.",point);
+			updateUserLocation(point);
+		}else{
+		console.log("您选择地址没有解析到结果!",returnCitySN);
+		}
+	}, "成都市");	
+}
+
+function updateUserLocation(position){//注意，由于无登录用户检查，只需要更新本地信息
+	console.log("trying to update user location.",position);
+	//更新到本地cookie，供后续使用
+	xcookie.set("lat",position.lat,100);
+	xcookie.set("lon",position.lng,100);
+}
+
 setInterval(function ()
 {
     if ($(window).scrollTop() >= $(document).height() - $(window).height() - dist && !loading)
@@ -124,10 +179,15 @@ function loadItems(){//获取内容列表
     if(filter.trim()=="byPrice" || filter.trim()=="byScore"||filter.trim()=="byDistance"){//需要进行过滤
         if(filter.trim()=="byPrice"){
             esQuery = esQueryByPrice;
-        }else if(filter.trim().equalsIgnoreCase("byScore")){
+        }else if(filter.trim()=="byScore"){
             
-        }else if(filter.trim().equalsIgnoreCase("byDistance")){
-            
+        }else if(filter.trim()=="byDistance"){
+        	var currentLocation = {
+        		lat:xcookie.get('lat')?parseFloat(xcookie.get('lat')):30.671479,
+        		lon:xcookie.get('lon')?parseFloat(xcookie.get('lon')):104.072331
+        	}
+        	console.log("try to search around current location.",currentLocation);
+            esQuery = getQueryByDistance(currentLocation.lat,currentLocation.lon);
         }
         if(tagging.trim().length>0){//使用指定内容进行搜索
             q.match.full_text = tagging;
@@ -280,3 +340,33 @@ function changeCategory(key,q){
     page.current = -1;//设置浏览页面为未开始
     loadItems();//重新加载数据
 }
+
+
+//cookie 操作封装
+var xcookie = {  
+    set:function(key,val,time){//设置cookie方法  
+        var date=new Date(); //获取当前时间  
+        var expiresDays=time;  //将date设置为n天以后的时间  
+        date.setTime(date.getTime()+expiresDays*24*3600*1000); //格式化为cookie识别的时间  
+        document.cookie=key + "=" + val +";expires="+date.toGMTString();  //设置cookie  
+    },  
+    get:function(key){//获取cookie方法  
+        /*获取cookie参数*/  
+        var cookies = document.cookie.replace(/[ ]/g,"");  //获取cookie，并且将获得的cookie格式化，去掉空格字符  
+        var arrCookie = cookies.split(";")  //将获得的cookie以"分号"为标识 将cookie保存到arrCookie的数组中  
+        var tips;  //声明变量tips  
+        for(var i=0;i<arrCookie.length;i++){   //使用for循环查找cookie中的tips变量  
+            var arr=arrCookie[i].split("=");   //将单条cookie用"等号"为标识，将单条cookie保存为arr数组  
+            if(key==arr[0]){    //匹配变量名称，其中arr[0]是指的cookie名称，如果该条变量为tips则执行判断语句中的赋值操作  
+                tips=arr[1];    //将cookie的值赋给变量tips  
+                break;          //终止for循环遍历  
+            }  
+        }  
+        return tips;  
+    },  
+    del:function(key){ //删除cookie方法  
+         var date = new Date(); //获取当前时间  
+         date.setTime(date.getTime()-10000); //将date设置为过去的时间  
+         document.cookie = key + "=v; expires =" +date.toGMTString();//设置cookie  
+    }  
+};
