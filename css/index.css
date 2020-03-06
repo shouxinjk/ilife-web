@@ -21,3 +21,21 @@ div.title{
 	text-align: center;
 }
 
+.foot{
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	width:100%;
+	background-color: gray;
+	z-index: 9;
+	font-size:12px;
+	line-height: 20px;
+	color:white;
+}
+
+.foot a{
+	font-size:12px;
+	line-height: 20px;
+	color:white;
+}
+
