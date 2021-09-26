@@ -2,11 +2,11 @@
 $(document).ready(function ()
 {
     //获取数据保护：通过sohu接口直接得到所在城市信息，有可能无法得到，使用默认值
-    if(!returnCitySN){
-        returnCitySN = {"cip": "110.184.65.88", "cid": "510100", "cname": "四川省成都市"};
+    if(typeof(returnCitySN)!="undefined"){
+        //returnCitySN = {"cip": "110.184.65.88", "cid": "510100", "cname": "四川省成都市"};
+        //获取用户位置
+        getUserLocation();
     }
-	//获取用户位置
-	getUserLocation();
     //根据屏幕大小计算字体大小
     const oHtml = document.getElementsByTagName('html')[0]
     const width = oHtml.clientWidth;
