@@ -52,8 +52,14 @@ $(document).ready(function ()
     $("#findByScore").click(function(){//注册搜索事件：点击搜索好物
         tagging = $(".search input").val().trim();
         window.location.href="index.html?filter=byScore&keyword="+tagging;
-    });        
+    });    
+
+    //注册copy监听事件：注意需要在内部处理触发节点
+    document.addEventListener('copy',copyItem);
+
 });
+
+var pendingCopyItem = "";
 
 var columnWidth = 300;//默认宽度300px
 var columnMargin = 5;//默认留白5px
@@ -276,17 +282,33 @@ function insertItem(){
     var image = "<img src='"+item.images[0]+"' width='"+imgWidth+"' height='"+imgHeight+"'/>"
     //var title = "<span class='title'><a href='info.html?category="+category+"&id="+item._key+"'>"+item.title+"</a></span>"
     var title = "<div class='title'>"+item.title+"</div>"
-    $("#waterfall").append("<li><div data='"+item._key+"'>" + image +title+ "</div></li>");
+    $("#waterfall").append("<li><div id='"+item._key+"' data='"+item._key+"'>" + image +title+ "</div></li>");
     num++;
 
     //注册事件
-    $("div[data='"+item._key+"']").click(function(){
+    $("div[data='"+item._key+"']").click(function(e){
         //跳转到详情页
-        window.location.href = "info.html?category="+category+"&id="+item._key;
-    });
+        //window.location.href = "info.html?category="+category+"&id="+item._key;
+        //just for test: 拷贝Item到剪贴板，便于后续粘贴
+        //copyItem(item._key);
+        console.log("trigger copy event");
+        //修改当前选中item
+        pendingCopyItem = item._key;
+        document.execCommand("copy");//触发拷贝事件
+    }); 
 
     // 表示加载结束
     loading = false;
+}
+
+//test
+function copyItem(event){
+    console.log("start copy item.[itemKey]"+pendingCopyItem,event);
+    event.preventDefault();//阻止默认行为
+    var temp = document.getElementById(pendingCopyItem).outerHTML;
+    console.log("html copied.[itemKey]"+pendingCopyItem,temp);
+    event.clipboardData.setData('text/html', temp);
+     
 }
 
 //当没有更多item时显示提示信息
