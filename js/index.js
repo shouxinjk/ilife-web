@@ -288,7 +288,7 @@ function insertItem(){
     //注册事件
     $("div[data='"+item._key+"']").click(function(e){
         //跳转到详情页
-        //window.location.href = "info.html?category="+category+"&id="+item._key;
+        window.location.href = "info.html?category="+category+"&id="+item._key;
         //just for test: 拷贝Item到剪贴板，便于后续粘贴
         //copyItem(item._key);
         console.log("trigger copy event");
