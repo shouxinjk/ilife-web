@@ -39,3 +39,22 @@ div.title{
 	color:white;
 }
 
+.qrcode{
+	text-align: center;
+	position: fixed;
+	top: 0;
+	right:0;
+	width:140px;
+	z-index: 9;
+}
+.qrcode img{
+	width:140px;
+}
+.qrcode div{
+	background-color: black;
+	color:white;
+	font-weight: bold;
+	font-size:12px;
+	line-height: 20px;
+}
+
