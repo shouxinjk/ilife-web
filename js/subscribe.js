@@ -163,7 +163,7 @@ function initAmis(){
                           "body": [
                             {
                               "type": "tpl",
-                              "tpl": "打开微信扫码关注<br/>接收通知及客服消息",
+                              "tpl": "打开微信扫码关注",
                               "className": "text-center",
                             }
                           ],
@@ -224,7 +224,7 @@ function initAmis(){
                             {
                               "type": "image",
                               "name": "qrcode",
-                              "className": "text-center w-full",
+                              "className": "text-center w-full mx-38",
                               "id": "u:6496d92e6f29"
                             }
                           ],
