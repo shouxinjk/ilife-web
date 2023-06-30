@@ -163,7 +163,7 @@ function initAmis(){
                           "body": [
                             {
                               "type": "tpl",
-                              "tpl": "打开微信扫码关注",
+                              "tpl": "打开微信扫码关注<br/>接收通知及客服消息",
                               "className": "text-center",
                             }
                           ],
