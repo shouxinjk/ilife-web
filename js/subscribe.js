@@ -75,14 +75,14 @@ function checkPayResult ( out_trade_no ) {
 }
 
 //建立订阅记录
-function createPkgSubscritpionRecord ( out_trade_no, salePackageId, subscribeType ) {
+function createPkgSubscritpionRecord ( out_trade_no, salePackageId, subscribeType, businessType, companyName, tenantType, contactPhone ) {
     console.log("try add pkg subscription.",out_trade_no, salePackageId, subscribeType);
     let effectiveDate = new Date();//默认当前日期开始
     let expireDate = new Date().setFullYear(effectiveDate.getFullYear()+1);
 
 
         $.ajax({
-            url: SAAS_API + "/erp/subscription/add",
+            url: SAAS_API + "/erp/subscription/register",
             type:"post",
             data: {
               id: out_trade_no,
@@ -92,8 +92,12 @@ function createPkgSubscritpionRecord ( out_trade_no, salePackageId, subscribeTyp
               subscribeType: subscribeType,
               effectiveOn: effectiveDate,
               expireOn: expireDate,
+              businessType: businessType,
+              userName: companyName,
+              userType: tenantType,
+              userPhone: contactPhone,
             },
-            headers: {}, //TODO：需要取消身份认证
+            headers: {}, //NOTICE：注册开通无需授权
             success:function(res){
                 console.log("got pay result.",res);
                 if(res.data && res.data.success && res.data.data && res.data.data.tradeState==="SUCCESS"){
@@ -121,9 +125,9 @@ function initAmis(){
           "title": "注册与订阅",
           "data":{
             "qrcode":"images/qrcode.jpg",
-            "price": price,
-            "id": productId,
-            "name": productName,
+            //"price": price, //URL参数传入
+            //"id": productId, //URL参数传入
+            //"name": productName, //URL参数传入
           },
           "body": [
             {
@@ -285,6 +289,35 @@ function initAmis(){
                           "type": "container",
                           "body": [
                             {
+                              "type": "select",
+                              "label": "业务领域",
+                              "name": "businessType",
+                              "options": [
+                                {
+                                  "label": "定制旅游/旅行社",
+                                  "value": "travel"
+                                },
+                                {
+                                  "label": "体检中心/体检咨询",
+                                  "value": "health"
+                                },
+                                {
+                                  "label": "会务/企业团建",
+                                  "value": "enterprise"
+                                },
+                                {
+                                  "label": "酒店/营地/度假村",
+                                  "value": "hotel"
+                                },
+                                {
+                                  "label": "其他",
+                                  "value": "other"
+                                }
+                              ],
+                              "value": "",
+                              "required": true
+                            },
+                            {
                               "type": "input-text",
                               "label": "公司全称",
                               "name": "companyName",
@@ -397,7 +430,7 @@ function initAmis(){
                                     };
                       
                                     //提交一条空白订阅记录，待支付完成后更新相应数据
-                                    createPkgSubscritpionRecord(out_trade_no, orgData.id, "yearly");//默认为按年订阅
+                                    createPkgSubscritpionRecord(out_trade_no, orgData.id, "yearly", orgData.businessType, orgData.companyName, orgData.tenantType, orgData.contactPhone);//默认为按年订阅
                 
                                     //开始查询支付结果
                                     checkPayResult(out_trade_no);
@@ -438,6 +471,7 @@ function initAmis(){
                                     "price": "${price}", //传递价格：单位为分
                                     "id": "${id}", //当前选中阅豆产品ID
                                     "name":"${name}", //当前选中产品名称
+                                    "tenantType":"${tenantType}", //订阅用户类型：person/team/compay URL参数传递
                                     "&":"$$" //传递搜索表单数据
                                   }
                                 },
