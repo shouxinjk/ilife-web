@@ -478,17 +478,13 @@ function initAmis(){
                                 "body":[
                                   { //显示购买内容
                                     "type": "tpl",
-                                    "tpl": "订阅${name}<br/>￥${price*0.01}<br/>&nbsp;"
+                                    "tpl": "打开微信扫码付款<br/>￥${price*0.01}<br/>&nbsp;"
                                   },
                                   {
                                     "type": "qr-code",
                                     "className":"mx-38",
                                     "codeSize": 128,
                                     "value": "${url}"
-                                  },
-                                  { //购买提示
-                                    "type": "tpl",
-                                    "tpl": "<br/>打开微信扫码付款"
                                   },
                                 ]
                                 
