@@ -163,7 +163,7 @@ function initAmis(){
                           "body": [
                             {
                               "type": "tpl",
-                              "tpl": "打开微信扫码关注",
+                              "tpl": "打开微信扫码关注<br/>接收管理员通知",
                               "className": "text-center",
                             }
                           ],
@@ -224,15 +224,15 @@ function initAmis(){
                             {
                               "type": "image",
                               "name": "qrcode",
-                              "className": "text-center w-full mx-38",
-                              "id": "u:6496d92e6f29"
+                              "className": "text-center w-full",
+                              "width": 128,
+                              "height": 128,
                             }
                           ],
                           "size": "lg",
                           "wrapperBody": false,
                           "isFixedHeight": false,
                           "isFixedWidth": false,
-                          "id": "u:d68b6d747179"
                         },
                         {
                           "type": "container",
